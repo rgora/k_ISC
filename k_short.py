@@ -37,7 +37,7 @@ Options:
 #     with this program; if not, write to the Free Software Foundation, Inc.,
 #     675 Mass Ave, Cambridge, MA 02139, USA.
 
-__author__     = "Rafal Szabla and Robert W. Góra "
+__author__     = "Rafal Szabla and Robert W. Gora "
 __maintainer__ = "Radal Szabla"
 __email__      = "rafal.szabla@gmail.com"
 __license__    = "GPL"
