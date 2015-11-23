@@ -45,7 +45,8 @@ __version__    = "1.0.2"
 
 import sys, getopt, math
 import numpy as np
-from scipy.linalg import sqrtm
+import matplotlib.pylab as pl
+from scipy.linalg import sqrtm, det
 from math import sqrt, exp
 
 global cmRectoHa
@@ -133,14 +134,24 @@ def Main(argv):
     # Duschinsky Matrix calculation
     # J=np.dot(np.transpose(V2),V1)
     J=V2.T*V1
+    print "Duschinsky's matrix determinant is:", det(J)
     if DBG:
-        print "Duschinsky matrix:\n", J
+        print "Duschinsky matrix:\n", J.round(2)
+        print "Plot of Duschinsky matrix (absolute values):"
+        f = pl.figure()
+        pl.imshow(np.absolute(J), interpolation='none', cmap=pl.cm.gray_r)
+        pl.colorbar()
+        pl.show()
 
     # Displacement vector
     # dR=np.subtract(R2,R1)
     # D=np.dot(np.dot(np.transpose(V2),M1),dR)
     dR=R1-R2
-    D=V2.T*sqrtm(M1)*dR
+    if MWC:
+        D=V2.T*sqrtm(M1)*dR
+    else:
+        D=V2.T*dR
+
     if DBG:
         print "Displacement vector R2-R1 [a.u.]:\n", dR
         print "Displacement in terms of normal coordinates D [a.u.]:\n", D
