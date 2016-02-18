@@ -63,7 +63,7 @@ def Main(argv):
     '''Parse commandline and loop throught the logs'''
 
 #   User supplied data - delE between states and SOC
-    dE=-6652*cmRectoHa
+    dE=6652*cmRectoHa
     soc=48.15*cmRectoHa
 
     DBG=False
@@ -133,7 +133,7 @@ def Main(argv):
 
     # Duschinsky Matrix calculation
     # J=np.dot(np.transpose(V2),V1)
-    J=V2.T*V1
+    J=V2u.T*V1u
     print "Duschinsky's matrix determinant is:", det(J)
     if DBG:
         print "Duschinsky matrix:\n", J.round(2)
