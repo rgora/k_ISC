@@ -14,7 +14,8 @@ coord
 vib_normal_modes
 vibspectrum
 
-The values of SOC and E(T)-E(S) should be changed in script.
+The values of SOC and of the adiabatic energy gap E(S)-E(T) should be changed
+in script.
 
 ## Usage ##
 

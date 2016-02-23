@@ -10,7 +10,8 @@ coord
 vib_normal_modes
 vibspectrum
 
-The values of SOC and E(T)-E(S) should be changed in script.
+The values of SOC and of the adiabatic energy gap E(S)-E(T) should be changed
+in script.
 
 Usage: k_short.py [options] singlet_dir triplet_dir
 
@@ -38,7 +39,7 @@ Options:
 #     675 Mass Ave, Cambridge, MA 02139, USA.
 
 __author__     = "Rafal Szabla and Robert W. Gora "
-__maintainer__ = "Radal Szabla"
+__maintainer__ = "Rafal Szabla"
 __email__      = "rafal.szabla@gmail.com"
 __license__    = "GPL"
 __version__    = "1.0.2"
