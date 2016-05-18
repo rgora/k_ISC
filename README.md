@@ -14,8 +14,9 @@ coord
 vib_normal_modes
 vibspectrum
 
-The values of SOC and of the adiabatic energy gap E(S)-E(T) should be changed
-in script.
+The values of SOC (in here the sum of squares of absolute magnitudes of SOC
+matrix elements between S and all three components of T state) and of the
+adiabatic energy gap E(S)-E(T) must be provided as well.
 
 ## Usage ##
 
@@ -26,3 +27,6 @@ Options:
   -d, --debug      print all calculated matrices
   -u, --unweighted calculate constants in dimension-less mass-unweighted
                    coordinates (by default the mass-weighted coordinates are used)
+  -a, --aeg        adiabatic energy gap E(S)-E(T) in [au]
+  -s, --soc        spin orbit coupling given as the sum of squares of matrix
+                   elements for all three components of T state in [cm^-2]

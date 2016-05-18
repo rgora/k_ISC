@@ -10,8 +10,8 @@ coord
 vib_normal_modes
 vibspectrum
 
-The values of SOC and of the adiabatic energy gap E(S)-E(T) should be changed
-in script.
+The values of SOC and of the adiabatic energy gap E(S)-E(T) must be provided as
+well.
 
 Usage: k_short.py [options] singlet_dir triplet_dir
 
@@ -20,6 +20,9 @@ Options:
   -d, --debug      print all calculated matrices
   -u, --unweighted calculate constants in dimension-less mass-unweighted
                    coordinates (by default the mass-weighted coordinates are used)
+  -a, --aeg        adiabatic energy gap E(S)-E(T) in [au]
+  -s, --soc        spin orbit coupling given as the sum of squares of matrix
+                   elements for all three components of T state in [cm^-2]
 """
 
 #     Copyright (C) 2015, Rafal Szabla (rafal.szabla@gmail.com)
@@ -63,18 +66,17 @@ def Usage():
 def Main(argv):
     '''Parse commandline and loop throught the logs'''
 
-#   User supplied data - delE between states and SOC
-    dE=6652*cmRectoHa
-    soc=48.15*cmRectoHa
-
     DBG=False
     MWC=True
 
     # Parse commandline
     try:
-        opts, args = getopt.getopt(argv, "hdu", ["help",
-                                                 "debug",
-                                                 "unweighted"])
+        opts, args = getopt.getopt(argv, "hdua:s:", ["help",
+                                                     "debug",
+                                                     "unweighted",
+                                                     "aeg",
+                                                     "soc",
+                                                     ])
     except getopt.GetoptError, error:
         print(error)
         Usage()
@@ -88,6 +90,12 @@ def Main(argv):
             DBG=True
         elif opt in ("-u", "--unweighted"):
             MWC=False
+        elif opt in ("-u", "--unweighted"):
+            MWC=False
+        elif opt in ("-a", "--aeg="):
+            dE=float(arg)
+        elif opt in ("-s", "--soc="):
+            soc=float(arg)*cmRectoHa**2
 
     # Parse each data dir
     data_dirs = args
@@ -197,7 +205,7 @@ def k_short(J,D,O1,O2,soc,dE,nat,DBG,linear=False):
         sum_c+=(A[i])**2/O1[i,i]
     
     # k^{short}_{ISC} from Eq.(11) from JCP 134, 154105 (2011)
-    k_sh=(soc**2)*sqrt(math.pi/(0.0625*sum_b + 0.25*sum_c))*exp(-1.0*((0.25*sum_a + C[0] - dE)**2)/(0.25*sum_b+sum_c))
+    k_sh=soc*sqrt(math.pi/(0.0625*sum_b + 0.25*sum_c))*exp(-1.0*((0.25*sum_a + C[0] - dE)**2)/(0.25*sum_b+sum_c))
     
     print "k_short = %s [a.u.]" % k_sh
     print "k_short = %e [1/s]"  % (k_sh/au2s)
@@ -210,7 +218,7 @@ def GetCoords(data_dir, linear=False):
     # Conversion from AMU to a.u.
     amu2au = 1822.88853
 
-    masses = {"c" : 12.01115, "o" : 15.99940, "n" : 14.00670, "h" : 1.00797}
+    masses = {"c" : 12.01115, "o" : 15.99940, "n" : 14.00670, "h" : 1.00797, "s" : 32.066}
     atomic_masses=[]
     r=[]
     nat=0
