@@ -4,6 +4,8 @@ k_short.py
 The k_short.py calculates intersystem crossing rates (k_ISC) in the short-time
 approximation following Eq (11) of JCP 134, 154105 (2011).
 
+It's a short script written by Rafał Szabla & Robert W. Góra
+
 It expects a few Turbomole 6.3 output files in two directories for the initial
 singlet and the final triplet states.
 
