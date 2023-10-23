@@ -21,7 +21,7 @@ matrix elements between S and all three components of T state) and of the
 adiabatic energy gap E(S)-E(T) must be provided as well.
 
 ## Usage ##
-
+```
 Usage: k_short.py [options] singlet_dir triplet_dir
 
 Options:
@@ -32,3 +32,4 @@ Options:
   -a, --aeg        adiabatic energy gap E(S)-E(T) in [au]
   -s, --soc        spin orbit coupling given as the sum of squares of matrix
                    elements for all three components of T state in [cm^-2]
+```
